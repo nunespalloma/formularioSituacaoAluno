@@ -29,22 +29,49 @@ public class FormularioServlet extends HttpServlet {
         double nota2 = Double.parseDouble(req.getParameter("nota2"));
         double vs = Double.parseDouble(req.getParameter("vs"));
         boolean resultado = false;
+        String tamNome = "";
+        String valorNota = "";
+        boolean validacao = true;
+        String statusAux = "0";
         
         Aluno aluno = new Aluno(nome, nota1, nota2, vs);
         resultado = aluno.verificar();
         
-        if (req.getServletContext().getAttribute("alunos") == null){
-            ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-            alunos.add(aluno);
-            req.getServletContext().setAttribute("alunos", alunos);
-            req.getRequestDispatcher("Historico.jsp").forward(req, resp);
+        if(nome.length() < 2 || nome.length() > 50){
+            //tamNome = "errado";
+            //req.setAttribute("tamNome", tamNome);//o atributo "tamNome" é criado
+            validacao = false;
+        }
+        if(nota1 < 102 || nota1 > 0){
+            //valorNota = "errado";
+            //req.setAttribute("valorNota", valorNota);
+            validacao = false;
+        }
+        if (validacao == false){
+            statusAux = "1";
+            req.setAttribute("validacao", statusAux);
+            req.getRequestDispatcher("Formulario.jsp").forward(req, resp);
         }
         else{
-            ArrayList<Aluno> alunos = (ArrayList<Aluno>) req.getServletContext().getAttribute("alunos");
-            alunos.add(aluno);
-            req.getServletContext().setAttribute("alunos", alunos);
-            req.getRequestDispatcher("Historico.jsp").forward(req, resp);
+            //no caso de entrar nesse if, o atributo "alunos" não existe.
+            //Por isso, comparar com null.
+            if (req.getServletContext().getAttribute("alunos") == null){ 
+                ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+                alunos.add(aluno);
+                req.getServletContext().setAttribute("alunos", alunos);
+                //código para despachar para a pág. do parâmetro, ou seja, 
+                //para fazer com que se vá para da página atual para a página do parâmetro.
+                //Nesse caso, de Formulário.jsp para Histórico.jsp
+                //forward(req,resp) é para que a pág. do parâmetro conheça 
+                //os atributos do req (request) e do resp (response) 
+                req.getRequestDispatcher("Historico.jsp").forward(req, resp);
+            }
+            else{
+                ArrayList<Aluno> alunos = (ArrayList<Aluno>) req.getServletContext().getAttribute("alunos");
+                alunos.add(aluno);
+                req.getServletContext().setAttribute("alunos", alunos);
+                req.getRequestDispatcher("Historico.jsp").forward(req, resp);
+            }
         }
-
     }
 }

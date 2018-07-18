@@ -13,7 +13,13 @@
     </head>
     <body>
         <form action="FormularioServlet" method="POST">
-            Nome: <input type="text" name="nome" placeholder="Digite seu nome"/><br><br>
+            Nome: <input type="text" name="nome" placeholder="Digite seu nome"/> 
+            <%if(request.getAttribute("validacao") == "1"){%>
+            <%-- <%=request.getAttribute("tamNome")%> <%-- printa o atributo "tamNome" --%>
+            CAMPOS ESCRITOS DE FORMA ERRADA
+            <%}%>
+            <br><br>
+            
             Nota 1: <input type="text" name="nota1" placeholder="Digite sua nota 1"/><br><br>
             Nota 2: <input type="text" name="nota2" placeholder="Digite sua nota 2"/><br><br>
             VS: <input type="text" name="vs" placeholder="Digite sua VS"/><br><br>
