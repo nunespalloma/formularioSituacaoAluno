@@ -13,16 +13,41 @@
     </head>
     <body>
         <form action="FormularioServlet" method="POST">
-            Nome: <input type="text" name="nome" placeholder="Digite seu nome"/> 
-            <%if(request.getAttribute("validacao") == "1"){%>
-            <%-- <%=request.getAttribute("tamNome")%> <%-- printa o atributo "tamNome" --%>
-            CAMPOS ESCRITOS DE FORMA ERRADA
+            Nome: <input type="text" name="nome" placeholder="Digite seu nome" value="<%=request.getParameter("nome") != null ? request.getParameter("nome") : ""%>"/> 
+            <%if(request.getAttribute("msgErroNome") != null){%>
+            <%=request.getAttribute("msgErroNome")%> <%-- printa o atributo "tamNome" --%>
+            <%}%>
+            <br><br> <%-- pula linha (nesse caso, pulou 2 linhas)--%>
+            
+            <select name="sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outros">Outros</option>
+            </select>
+            <br><br>
+            
+            <select name="curso">
+                <option value="Ciencia da Computacao">Ciência da computação</option>
+                <option value="Sistemas de Informacao">Sistemas de informação</option>
+                <option value="Matematica">Matemática</option>
+            </select>
+            <br><br>
+            
+            Nota 1: <input type="text" name="nota1" placeholder="Digite sua nota 1"/>
+            <%if(request.getAttribute("msgErroNota1") != null){%>
+            <%=request.getAttribute("msgErroNota1")%>
             <%}%>
             <br><br>
             
-            Nota 1: <input type="text" name="nota1" placeholder="Digite sua nota 1"/><br><br>
-            Nota 2: <input type="text" name="nota2" placeholder="Digite sua nota 2"/><br><br>
-            VS: <input type="text" name="vs" placeholder="Digite sua VS"/><br><br>
+            Nota 2: <input type="text" name="nota2" placeholder="Digite sua nota 2"/>
+            <%if(request.getAttribute("msgErroNota2") != null){%>
+            <%=request.getAttribute("msgErroNota2")%>
+            <%}%>
+            <br><br>
+            
+            VS: <input type="text" name="vs" placeholder="Digite sua VS"/>
+            <br><br>
+            
             <button type="submit"> Enviar </button>
         </form>
     </body>

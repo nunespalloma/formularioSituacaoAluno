@@ -21,6 +21,9 @@
                 <td> Nota 1 </td>
                 <td> Nota 2 </td>
                 <td> Vs </td>
+                <td> Sexo </td>
+                <td> Curso </td>
+                <td> Resultado </td>
             </tr>
         <% for (int i=0;i<alunos.size();i++){%>
             <tr>
@@ -28,6 +31,9 @@
                 <td><%=alunos.get(i).getNota1()%></td>
                 <td><%=alunos.get(i).getNota2()%></td>
                 <td><%=alunos.get(i).getVs()%></td>
+                <td><%=alunos.get(i).getSexo()%></td>
+                <td><%=alunos.get(i).getCurso()%></td>
+                <td><%=alunos.get(i).getResultado()%></td>
             </tr>
         <%}%>
         </table>
