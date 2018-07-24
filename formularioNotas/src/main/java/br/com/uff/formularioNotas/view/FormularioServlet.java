@@ -25,9 +25,9 @@ public class FormularioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nome = req.getParameter("nome");
-        double nota1 = Double.parseDouble(req.getParameter("nota1"));
-        double nota2 = Double.parseDouble(req.getParameter("nota2"));
-        double vs = Double.parseDouble(req.getParameter("vs"));
+        double nota1 = 0.0;
+        double nota2 = 0.0;
+        double vs = 0.0;
         boolean resultado = false;
         String sexo = req.getParameter("sexo");
         String curso = req.getParameter("curso");
@@ -37,28 +37,59 @@ public class FormularioServlet extends HttpServlet {
         String msgErroNome = null;
         String msgErroNota1 = null;
         String msgErroNota2 = null;
+        String msgErroVs = null;
         
         if(nome.length() < 2 || nome.length() > 50){
             //tamNome = "errado";
             //req.setAttribute("tamNome", tamNome);//o atributo "tamNome" é criado
-            msgErroNome = "Tamanho para nome inválido.";
+            msgErroNome = "Tamanho para nome inválido. Digite entre 2 e 50 caracteres.";
             req.setAttribute("msgErroNome", msgErroNome);
             validacao = false;
+        }
+        
+        try {
+            nota1 = Double.parseDouble(req.getParameter("nota1"));
+        }catch (NumberFormatException e) {
+            validacao = false;
+            msgErroNota1 = "Campo Numérico, digite somente numeros reais.";
+            req.setAttribute("msgErroNota1", msgErroNota1);
         }
         if(nota1 > 10 || nota1 < 0){
             //valorNota = "errado";
             //req.setAttribute("valorNota", valorNota);
-            msgErroNota1 = "Tamanho para nota 1 inválido.";
+            msgErroNota1 = "Nota fora do range. Digite valores entre 0 e 10.";
             req.setAttribute("msgErroNota1", msgErroNota1);
             validacao = false;
+        }
+        
+        try {
+            nota2 = Double.parseDouble(req.getParameter("nota2"));
+        }catch (NumberFormatException e) {
+            validacao = false;
+            msgErroNota2 = "Campo Numérico, digite somente numeros reais.";
+            req.setAttribute("msgErroNota2", msgErroNota2);
         }
         if(nota2 > 10 || nota2 < 0){
             //valorNota = "errado";
             //req.setAttribute("valorNota", valorNota);
-            msgErroNota2 = "Tamanho para nota 2 inválido.";
+            msgErroNota2 = "Nota fora do range. Digite valores entre 0 e 10.";
             req.setAttribute("msgErroNota2", msgErroNota2);
             validacao = false;
         }
+        
+        try {
+            vs = Double.parseDouble(req.getParameter("vs"));
+        }catch (NumberFormatException e) {
+            validacao = false;
+            msgErroVs = "Campo Numérico, digite somente numeros reais.";
+            req.setAttribute("msgErroVs", msgErroVs);
+        }
+        if(vs > 10 || vs < 0){
+            msgErroVs = "Nota fora do range. Digite valores entre 0 e 10.";
+            req.setAttribute("msgErroVs", msgErroVs);
+            validacao = false;
+        }
+        
         if (validacao == false){
             req.getRequestDispatcher("Formulario.jsp").forward(req, resp);
         }

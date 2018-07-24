@@ -33,19 +33,22 @@
             </select>
             <br><br>
             
-            Nota 1: <input type="text" name="nota1" placeholder="Digite sua nota 1"/>
+            Nota 1: <input type="text" name="nota1" placeholder="Digite sua nota 1" value="<%=request.getParameter("nota1") != null ? request.getParameter("nota1") : ""%>"/>
             <%if(request.getAttribute("msgErroNota1") != null){%>
             <%=request.getAttribute("msgErroNota1")%>
             <%}%>
             <br><br>
             
-            Nota 2: <input type="text" name="nota2" placeholder="Digite sua nota 2"/>
+            Nota 2: <input type="text" name="nota2" placeholder="Digite sua nota 2" value="<%=request.getParameter("nota2") != null ? request.getParameter("nota2") : ""%>"/>
             <%if(request.getAttribute("msgErroNota2") != null){%>
             <%=request.getAttribute("msgErroNota2")%>
             <%}%>
             <br><br>
             
-            VS: <input type="text" name="vs" placeholder="Digite sua VS"/>
+            VS: <input type="text" name="vs" placeholder="Digite sua VS" value="<%=request.getParameter("vs") != null ? request.getParameter("vs") : ""%>"/>
+            <%if(request.getAttribute("msgErroVs") != null){%>
+            <%=request.getAttribute("msgErroVs")%>
+            <%}%>
             <br><br>
             
             <button type="submit"> Enviar </button>
