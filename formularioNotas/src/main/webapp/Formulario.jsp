@@ -9,14 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
         <title>Formulario</title>
     </head>
     <body>
         <form action="FormularioServlet" method="POST">
-            Nome: <input type="text" name="nome" placeholder="Digite seu nome" value="<%=request.getParameter("nome") != null ? request.getParameter("nome") : ""%>"/> 
-            <%if(request.getAttribute("msgErroNome") != null){%>
-            <%=request.getAttribute("msgErroNome")%> <%-- printa o atributo "tamNome" --%>
-            <%}%>
+            Nome: <input type="text" name="nome" placeholder="Digite seu nome" value="${param.nome}"/> 
+            <core:if test="${not empty requestScope.msgErroNome}">
+                ${requestScope.msgErroNome} <%-- printa o atributo "tamNome" --%>
+            </core:if>
             <br><br> <%-- pula linha (nesse caso, pulou 2 linhas)--%>
             
             <select name="sexo">
@@ -33,22 +34,22 @@
             </select>
             <br><br>
             
-            Nota 1: <input type="text" name="nota1" placeholder="Digite sua nota 1" value="<%=request.getParameter("nota1") != null ? request.getParameter("nota1") : ""%>"/>
-            <%if(request.getAttribute("msgErroNota1") != null){%>
-            <%=request.getAttribute("msgErroNota1")%>
-            <%}%>
+            Nota 1: <input type="text" name="nota1" placeholder="Digite sua nota 1" value="${param.nota1}"/>
+            <core:if test="${not empty requestScope.msgErroNota1}">
+                ${requestScope.msgErroNota1}
+            </core:if>
             <br><br>
             
-            Nota 2: <input type="text" name="nota2" placeholder="Digite sua nota 2" value="<%=request.getParameter("nota2") != null ? request.getParameter("nota2") : ""%>"/>
-            <%if(request.getAttribute("msgErroNota2") != null){%>
-            <%=request.getAttribute("msgErroNota2")%>
-            <%}%>
+            Nota 2: <input type="text" name="nota2" placeholder="Digite sua nota 2" value="${param.nota2}"/>
+            <core:if test="${not empty requestScope.msgErroNota2}">
+                ${requestScope.msgErroNota2}
+            </core:if>
             <br><br>
             
-            VS: <input type="text" name="vs" placeholder="Digite sua VS" value="<%=request.getParameter("vs") != null ? request.getParameter("vs") : ""%>"/>
-            <%if(request.getAttribute("msgErroVs") != null){%>
-            <%=request.getAttribute("msgErroVs")%>
-            <%}%>
+            VS: <input type="text" name="vs" placeholder="Digite sua VS" value="${param.vs}"/>
+            <core:if test="${not empty requestScope.msgErroNome}">
+                <core:out value="${requestScope.msgErroNome}"/> <%-- printa o atributo "tamNome" --%>
+            </core:if>
             <br><br>
             
             <button type="submit"> Enviar </button>

@@ -11,10 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
         <title>Histórico</title>
     </head>
     <body>
-        <% ArrayList<Aluno> alunos = (ArrayList<Aluno>) getServletContext().getAttribute("alunos");%>
         <table border = "1">
             <tr>
                 <td> Nome </td>
@@ -25,17 +25,17 @@
                 <td> Curso </td>
                 <td> Resultado </td>
             </tr>
-        <% for (int i=0;i<alunos.size();i++){%>
-            <tr>
-                <td><%=alunos.get(i).getNome()%></td>
-                <td><%=alunos.get(i).getNota1()%></td>
-                <td><%=alunos.get(i).getNota2()%></td>
-                <td><%=alunos.get(i).getVs()%></td>
-                <td><%=alunos.get(i).getSexo()%></td>
-                <td><%=alunos.get(i).getCurso()%></td>
-                <td><%=alunos.get(i).getResultado()%></td>
-            </tr>
-        <%}%>
+            <core:forEach items="${applicationScope.alunos}" var="aluno">  <%--"alunos": é nome entre aspas na servlet --%>
+                <tr>
+                    <td>${aluno.nome}</td>
+                    <td>${aluno.nota1}</td>
+                    <td>${aluno.nota2}</td>
+                    <td>${aluno.vs}</td>
+                    <td>${aluno.sexo}</td>
+                    <td>${aluno.curso}</td>
+                    <td>${aluno.resultado}</td>
+                </tr>
+            </core:forEach>
         </table>
     </body>
 </html>
